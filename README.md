@@ -106,6 +106,41 @@ jatel-family-main/
 
 Jefferson Santos — v5.0 (atualizado com melhorias de visual, .gitignore e documentacao completa)
 
+## Configuração dos Arquivos PHP (Local)
+
+Os arquivos `php/conexao.php` e `php/ai_responder.php` **não são versionados** (protegidos pelo `.gitignore`). Para rodar o backend localmente, crie-os manualmente conforme os templates abaixo e preencha com suas credenciais:
+
+### 1. `php/conexao.php`
+
+```php
+<?php
+// Template local — NAO COMMITAR
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'nome_do_banco');
+define('DB_USER', 'seu_usuario');
+define('DB_PASS', 'sua_senha_segura'); // <-- preencha aqui
+
+// Conexao PDO
+try {
+    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4", DB_USER, DB_PASS, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+} catch (PDOException $e) {
+    die("Erro de conexao: " . $e->getMessage());
+}
+```
+
+### 2. `php/ai_responder.php`
+
+```php
+<?php
+// Template local — NAO COMMITAR
+$apiKey = 'sk-sua-chave-aqui'; // <-- substitua pela sua chave
+
+// Exemplo de uso:
+// $headers = ['Authorization: Bearer ' . $apiKey];
+```
+
+> **Importante:** mantenha esses arquivos apenas na sua máquina. Se precisar compartilhar o projeto, sempre remova/ignore as credenciais antes do commit.
+
 ## Licenca / Uso
 
 Projeto educacional e de lazer. Pode ser usado freely para fins familiares, educacionais e congregacionais. Mantenha os creditos e nao exponha credenciais de banco/API.
