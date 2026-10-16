@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JATEL-GAMES - Jogo da Velha Bíblico</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/game-shared.css">
+  <link rel="stylesheet" href="tic-tac-toe/style.css">
+</head>
+<body>
+
+  <header class="game-header">
+    <h1>Jogo da Velha Bíblico</h1>
+    <nav>
+      <a href="index.html">← Home</a>
+    </nav>
+  </header>
+
+  <main class="game-content">
+    <div class="ttt-container">
+
+      <div class="ttt-scoreboard">
+        <div class="score-item score-x">
+          <span class="score-symbol">✕</span>
+          <span class="score-name" id="playerXName">Jogador 1</span>
+          <span class="score-count" id="scoreX">0</span>
+        </div>
+        <div class="score-item score-draw">
+          <span class="score-symbol">🤝</span>
+          <span class="score-name">Empates</span>
+          <span class="score-count" id="scoreDraw">0</span>
+        </div>
+        <div class="score-item score-o">
+          <span class="score-symbol">◯</span>
+          <span class="score-name" id="playerOName">Jogador 2</span>
+          <span class="score-count" id="scoreO">0</span>
+        </div>
+      </div>
+
+      <div class="ttt-status" id="status">Vez do Jogador 1 (✕)</div>
+
+      <div class="ttt-board" id="board">
+        <div class="ttt-cell" data-index="0"></div>
+        <div class="ttt-cell" data-index="1"></div>
+        <div class="ttt-cell" data-index="2"></div>
+        <div class="ttt-cell" data-index="3"></div>
+        <div class="ttt-cell" data-index="4"></div>
+        <div class="ttt-cell" data-index="5"></div>
+        <div class="ttt-cell" data-index="6"></div>
+        <div class="ttt-cell" data-index="7"></div>
+        <div class="ttt-cell" data-index="8"></div>
+      </div>
+
+      <button class="btn btn-primary ttt-restart" onclick="restartGame()">🔄 Novo Jogo</button>
+
+    </div>
+  </main>
+
+  <div class="question-modal" id="questionModal">
+    <div class="question-card">
+      <div class="question-category" id="questionCategory">Categoria</div>
+      <div class="question-text" id="questionText">Pergunta aqui...</div>
+      <div class="question-options" id="questionOptions"></div>
+      <div class="question-feedback hidden" id="questionFeedback"></div>
+    </div>
+  </div>
+
+  <footer class="game-footer">
+    <p>&copy; Jefferson Santos v5.0</p>
+  </footer>
+
+  <script src="tic-tac-toe/questions.js"></script>
+  <script src="tic-tac-toe/game.js"></script>
+</body>
+</html>

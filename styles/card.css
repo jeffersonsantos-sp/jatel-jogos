@@ -1,0 +1,170 @@
+/* Jogo da Memoria - Card Styles */
+
+.jogo {
+  align-items: center;
+  padding: var(--space-sm, 10px);
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  background-color: var(--color-bg, #3a3a3a);
+  gap: var(--space-xs, 5px);
+}
+
+.jogo .card {
+  padding: var(--space-lg, 30px);
+  margin: var(--space-xs, 5px);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 17vw;
+  height: 160px;
+  border-radius: var(--radius-xl, 0px 30px 0px 30px);
+  user-select: none;
+  position: relative;
+}
+
+.jogo .card img {
+  width: 100px;
+  height: 100px;
+  border-radius: var(--radius-lg, 30px);
+  object-fit: cover;
+}
+
+.jogo .card,
+.jogo .virado {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease;
+}
+
+.jogo .card {
+  background-color: var(--color-surface, #c4c4c4);
+  box-shadow: var(--shadow-sm, 1px 1px 1px rgba(0, 0, 0, 0.3));
+}
+
+.card:active {
+  transform: scale(0.97);
+  transition: transform 0.2s ease;
+}
+
+.card.flip {
+  transform: rotateY(180deg);
+}
+
+/* Card flip colors */
+.card.flip[data-nome="leao"],
+.card.flip[data-nome="leao"] img {
+  background-color: #84cffa;
+}
+
+.card.flip[data-nome="tigre"],
+.card.flip[data-nome="tigre"] img {
+  background-color: #FA8484;
+}
+
+.card.flip[data-nome="urso"],
+.card.flip[data-nome="urso"] img {
+  background-color: #E984FA;
+}
+
+.card.flip[data-nome="macaco"],
+.card.flip[data-nome="macaco"] img {
+  background-color: #84FAAC;
+}
+
+.card.flip[data-nome="cachorro"],
+.card.flip[data-nome="cachorro"] img {
+  background-color: #8684FA;
+}
+
+.card.flip[data-nome="gato"],
+.card.flip[data-nome="gato"] img {
+  background-color: #FFC0CB;
+}
+
+.card.flip[data-nome="elefante"],
+.card.flip[data-nome="elefante"] img {
+  background-color: #ff6b6b;
+}
+
+.card.flip[data-nome="bebe"],
+.card.flip[data-nome="bebe"] img {
+  background-color: #4ecdc4;
+}
+
+.card.flip[data-nome="cavalo"],
+.card.flip[data-nome="cavalo"] img {
+  background-color: #fa84c5;
+}
+
+.card.flip[data-nome="lua"],
+.card.flip[data-nome="lua"] img {
+  background-color: #f7dc6f;
+}
+
+.card.flip[data-nome="golfinho"],
+.card.flip[data-nome="golfinho"] img {
+  background-color: #85c1e9;
+}
+
+.card.flip[data-nome="beija-flor"],
+.card.flip[data-nome="beija-flor"] img {
+  background-color: #82e0aa;
+}
+
+/* Card faces */
+.frente,
+.verso {
+  width: 100px;
+  height: 100px;
+  padding: var(--space-md, 15px);
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.frente {
+  transform: rotateY(180deg);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .jogo {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .jogo {
+    margin: 0 5vw;
+  }
+
+  .jogo .card {
+    width: 27vw;
+    height: 17vh;
+  }
+}
+
+@media (max-width: 550px) {
+  .jogo {
+    padding: var(--space-xs, 10px);
+  }
+
+  .jogo .card {
+    width: 27vw;
+    height: 16vh;
+    margin: 1vw;
+  }
+
+  .jogo .card img {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 280px) {
+  .jogo .card img {
+    width: 70px;
+    height: 70px;
+  }
+}

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JATEL-GAMES - Quem Disse Isso?</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/game-shared.css">
+  <link rel="stylesheet" href="quem_disse/style.css">
+</head>
+<body>
+
+  <header class="game-header">
+    <h1>Quem Disse Isso?</h1>
+    <nav><a href="index.html">Home</a></nav>
+  </header>
+
+  <main class="game-content">
+    <div id="start-screen">
+      <button id="startButton">Iniciar Jogo</button>
+    </div>
+
+    <div id="game-area" class="hidden">
+      <div class="status-bar">
+        <span id="score">Pontuação: 0</span>
+        <span id="timer">Tempo restante: 60s</span>
+      </div>
+
+      <div id="quote-box">
+        <p id="quote">Clique em "Iniciar Jogo" para começar.</p>
+      </div>
+
+      <div class="options" id="options">
+        <button onclick="checkAnswer('Jesus')">Jesus</button>
+        <button onclick="checkAnswer('Paulo')">Paulo</button>
+        <button onclick="checkAnswer('Davi')">Davi</button>
+        <button onclick="checkAnswer('Moisés')">Moisés</button>
+      </div>
+
+      <p id="result"></p>
+
+      <button id="nextButton" onclick="nextQuote()" disabled>Próxima Pergunta</button>
+    </div>
+  </main>
+
+  <footer class="game-footer"><p>&copy; Jefferson Santos v5.0</p></footer>
+
+  <script src="quem_disse/script.js"></script>
+</body>
+</html>

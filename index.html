@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JATEL-GAMES</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <style>
+    /* Landing Page Specific Styles */
+    .hero {
+      background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, var(--color-primary-light) 100%);
+      color: white;
+      text-align: center;
+      padding: var(--space-3xl) var(--space-lg);
+      min-height: 40vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.5;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: var(--space-sm);
+      color: white;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span {
+      color: var(--color-accent-light);
+    }
+
+    .hero p {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      opacity: 0.9;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    /* Games Grid */
+    .games-section {
+      padding: var(--space-3xl) 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: var(--space-2xl);
+    }
+
+    .section-title h2 {
+      font-size: var(--font-size-3xl);
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-title p {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-lg);
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .game-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      transition: transform var(--transition-base), box-shadow var(--transition-base);
+      cursor: pointer;
+    }
+
+    .game-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .game-card:active {
+      transform: translateY(-2px);
+    }
+
+    .game-card .card-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 3px solid var(--color-accent);
+    }
+
+    .game-card .card-body {
+      padding: var(--space-lg);
+      text-align: center;
+    }
+
+    .game-card .card-body h3 {
+      font-size: var(--font-size-xl);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-sm);
+    }
+
+    .game-card .card-body .tag {
+      display: inline-block;
+      padding: var(--space-xs) var(--space-md);
+      background: var(--color-bg-alt);
+      color: var(--color-primary);
+      border-radius: var(--radius-xl);
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Footer */
+    .site-footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-xl) var(--space-lg);
+      text-align: center;
+    }
+
+    .site-footer p {
+      color: var(--color-text-muted);
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .site-footer .version {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    /* Dark Toggle */
+    .dark-toggle {
+      position: fixed;
+      bottom: var(--space-lg);
+      right: var(--space-lg);
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius-full);
+      background: var(--color-surface);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      z-index: 999;
+      border: 2px solid var(--color-border);
+      cursor: pointer;
+    }
+
+    .dark-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: var(--space-2xl) var(--space-md);
+        min-height: 30vh;
+      }
+
+      .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: var(--space-lg);
+      }
+
+      .games-section {
+        padding: var(--space-2xl) 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .games-grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+
+      .game-card .card-image {
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>JATEL <span>GAMES</span></h1>
+      <p>Jogos interativos para a familia. Aprenda, divirta-se e fortaleca sua fe.</p>
+    </div>
+  </section>
+
+  <!-- Games Grid -->
+  <section class="games-section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Escolha um Jogo</h2>
+        <p>12 jogos divertidos com temas biblicos</p>
+      </div>
+
+      <div class="games-grid">
+        <a href="perguntas.html" class="game-card">
+          <img src="images/game1.jpg" alt="Jogo de Perguntas" class="card-image">
+          <div class="card-body">
+            <h3>Jogo de Perguntas</h3>
+            <span class="tag">Trivia</span>
+          </div>
+        </a>
+
+        <a href="memoria.html" class="game-card">
+          <img src="images/game2.jpg" alt="Jogo da Memoria" class="card-image">
+          <div class="card-body">
+            <h3>Jogo da Memoria</h3>
+            <span class="tag">Cartas</span>
+          </div>
+        </a>
+
+        <a href="palavras.html" class="game-card">
+          <img src="images/game3.jpg" alt="Caca-Palavras" class="card-image">
+          <div class="card-body">
+            <h3>Caca-Palavras</h3>
+            <span class="tag">Palavras</span>
+          </div>
+        </a>
+
+        <a href="forca.html" class="game-card">
+          <img src="images/game4.jpg" alt="Jogo da Forca" class="card-image">
+          <div class="card-body">
+            <h3>Jogo da Forca</h3>
+            <span class="tag">Classico</span>
+          </div>
+        </a>
+
+        <a href="descubra_a_imagem.html" class="game-card">
+          <img src="images/game5.jpg" alt="Descubra a Imagem" class="card-image">
+          <div class="card-body">
+            <h3>Descubra a Imagem</h3>
+            <span class="tag">Desafio</span>
+          </div>
+        </a>
+
+        <a href="jogo_perfil.html" class="game-card">
+          <img src="images/game6.jpg" alt="Jogo do Perfil" class="card-image">
+          <div class="card-body">
+            <h3>Jogo do Perfil</h3>
+            <span class="tag">Quiz</span>
+          </div>
+        </a>
+
+        <a href="stop_biblico.html" class="game-card">
+          <img src="images/game7.jpg" alt="Stop Biblico" class="card-image">
+          <div class="card-body">
+            <h3>Stop Biblico</h3>
+            <span class="tag">Party</span>
+          </div>
+        </a>
+
+        <a href="quem_disse_isso.html" class="game-card">
+          <img src="images/game8.jpg" alt="Quem Disse Isso?" class="card-image">
+          <div class="card-body">
+            <h3>Quem Disse Isso?</h3>
+            <span class="tag">Quiz</span>
+          </div>
+        </a>
+
+        <a href="conversas.html" class="game-card">
+          <img src="images/game9.jpg" alt="Conversas no Serviço de Pregação" class="card-image">
+          <div class="card-body">
+            <h3>Conversas no Serviço de Pregação</h3>
+            <span class="tag">Decisao</span>
+          </div>
+        </a>
+
+        <a href="tic-tac-toe.html" class="game-card">
+          <img src="images/game10.jpg" alt="Jogo da Velha Bíblico" class="card-image">
+          <div class="card-body">
+            <h3>Jogo da Velha Bíblico</h3>
+            <span class="tag">Estrategia</span>
+          </div>
+        </a>
+
+        <a href="game-milhao.html" class="game-card">
+          <img src="images/game11.jpg" alt="Jogo do Milhão Bíblico" class="card-image">
+          <div class="card-body">
+            <h3>Jogo do Milhão Bíblico</h3>
+            <span class="tag">Trivia</span>
+          </div>
+        </a>
+
+        <a href="cara-a-cara.html" class="game-card">
+          <img src="images/game12.jpg" alt="Cara a Cara Bíblico" class="card-image">
+          <div class="card-body">
+            <h3>Cara a Cara Bíblico</h3>
+            <span class="tag">Estrategia</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p>&copy; 2025 Jefferson Santos - <span class="version">v5.0</span></p>
+  </footer>
+
+  <!-- Dark Mode Toggle -->
+  <button class="dark-toggle" onclick="toggleDarkMode()" aria-label="Alternar modo escuro">
+    <span id="darkIcon">&#9790;</span>
+  </button>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('dark-mode', isDark);
+      document.getElementById('darkIcon').innerHTML = isDark ? '&#9728;' : '&#9790;';
+    }
+
+    // Apply saved dark mode on load
+    if (localStorage.getItem('dark-mode') === 'true') {
+      document.body.classList.add('dark-mode');
+      document.getElementById('darkIcon').innerHTML = '&#9728;';
+    }
+  </script>
+</body>
+</html>

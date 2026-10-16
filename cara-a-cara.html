@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JATEL-GAMES - Cara a Cara Bíblico</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/game-shared.css">
+  <link rel="stylesheet" href="cara-a-cara/style.css">
+</head>
+<body>
+
+  <header class="game-header">
+    <h1>Cara a Cara Bíblico</h1>
+    <nav>
+      <a href="index.html">← Home</a>
+    </nav>
+  </header>
+
+  <main class="game-content">
+    <div class="cara-container">
+
+      <!-- Tela Inicial -->
+      <div class="cara-screen active" id="screen-start">
+        <div class="cara-logo">
+          <div class="logo-icon">🔍</div>
+          <h1>CARA A CARA</h1>
+          <h2>BÍBLICO</h2>
+          <p>Adivinhe o personagem secreto do seu adversário!</p>
+        </div>
+
+        <div class="cara-modes">
+          <button class="btn-cara btn-mode" onclick="startGame('cpu')">
+            <span class="mode-icon">🤖</span>
+            <span class="mode-title">Contra o Computador</span>
+            <span class="mode-desc">Desafie a CPU</span>
+          </button>
+          
+          <button class="btn-cara btn-mode btn-online" onclick="showOnlineMenu()">
+            <span class="mode-icon">🌐</span>
+            <span class="mode-title">Online</span>
+            <span class="mode-desc">Dispositivos diferentes</span>
+          </button>
+        </div>
+
+        <div class="cara-rules">
+          <h3>📋 Como Jogar</h3>
+          <ul>
+            <li>Cada jogador escolhe um personagem secreto</li>
+            <li>Faça perguntas de "sim" ou "não"</li>
+            <li>Elimine personagens baseado nas respostas</li>
+            <li>Adivinhe o personagem do adversário primeiro!</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tela Online Menu -->
+      <div class="cara-screen" id="screen-online">
+        <div class="cara-logo">
+          <div class="logo-icon">🌐</div>
+          <h1>MODO ONLINE</h1>
+          <h2>Cara a Cara Bíblico</h2>
+          <p>Jogue com amigos em dispositivos diferentes!</p>
+        </div>
+
+        <div class="cara-modes">
+          <button class="btn-cara btn-mode" onclick="showCreateRoom()">
+            <span class="mode-icon">🏠</span>
+            <span class="mode-title">Criar Sala</span>
+            <span class="mode-desc">Convide um amigo</span>
+          </button>
+          
+          <button class="btn-cara btn-mode" onclick="showJoinRoom()">
+            <span class="mode-icon">🚪</span>
+            <span class="mode-title">Entrar na Sala</span>
+            <span class="mode-desc">Use o código</span>
+          </button>
+        </div>
+
+        <div class="cara-footer">
+          <button class="btn-cara btn-back" onclick="goHome()">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- Tela Criar Sala -->
+      <div class="cara-screen" id="screen-create">
+        <div class="cara-logo">
+          <div class="logo-icon">🏠</div>
+          <h1>CRIAR SALA</h1>
+        </div>
+
+        <div class="online-form">
+          <div class="form-group">
+            <label>Seu Nome:</label>
+            <input type="text" id="playerName1" placeholder="Digite seu nome" maxlength="20">
+          </div>
+          
+          <button class="btn-cara btn-create" onclick="createRoom()">
+            🔨 Criar Sala
+          </button>
+          
+          <div class="room-code-display" id="roomCodeDisplay" style="display: none;">
+            <h3>Compartilhe este código:</h3>
+            <div class="room-code" id="roomCode">------</div>
+            <p class="copy-hint">Toque para copiar</p>
+            
+            <button class="btn-cara btn-create" onclick="proceedToSelection()" style="margin-top: 20px;">
+              👉 Próximo: Escolher Personagem
+            </button>
+          </div>
+          
+          <div class="waiting-message" id="waitingMessage" style="display: none;">
+            <div class="spinner"></div>
+            <p>Aguardando adversário escolher...</p>
+          </div>
+        </div>
+
+        <div class="cara-footer">
+          <button class="btn-cara btn-back" onclick="showOnlineMenu()">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- Tela Entrar na Sala -->
+      <div class="cara-screen" id="screen-join">
+        <div class="cara-logo">
+          <div class="logo-icon">🚪</div>
+          <h1>ENTRAR NA SALA</h1>
+        </div>
+
+        <div class="online-form">
+          <div class="form-group">
+            <label>Seu Nome:</label>
+            <input type="text" id="playerName2" placeholder="Digite seu nome" maxlength="20">
+          </div>
+          
+          <div class="form-group">
+            <label>Código da Sala:</label>
+            <input type="text" id="roomCodeInput" placeholder="Ex: ABC123" maxlength="6" style="text-transform: uppercase;">
+          </div>
+          
+          <button class="btn-cara btn-join" onclick="joinRoom()">
+            🚪 Entrar
+          </button>
+          
+          <div class="error-message" id="joinError" style="display: none;"></div>
+        </div>
+
+        <div class="cara-footer">
+          <button class="btn-cara btn-back" onclick="showOnlineMenu()">← Voltar</button>
+        </div>
+      </div>
+
+      <!-- Tela de Seleção -->
+      <div class="cara-screen" id="screen-select">
+        <div class="cara-header">
+          <h2 id="selectTitle">Jogador 1: Escolha seu personagem</h2>
+          <p id="selectSubtitle">Toque no personagem secreto</p>
+        </div>
+        
+        <div class="cara-grid" id="selectionGrid">
+          <!-- Personagens serão inseridos aqui -->
+        </div>
+        
+        <div class="cara-footer">
+          <button class="btn-cara btn-confirm" id="btnConfirm" onclick="confirmSelection()" disabled>
+            ✅ Confirmar Escolha
+          </button>
+        </div>
+      </div>
+
+      <!-- Tela do Jogo -->
+      <div class="cara-screen" id="screen-game">
+        <!-- Cabeçalho do Jogo -->
+        <div class="cara-game-header">
+          <div class="player-info player1-info" id="player1Box">
+            <span class="player-name" id="player1Name">Jogador 1</span>
+            <span class="player-remaining" id="player1Count">40 restantes</span>
+          </div>
+          <div class="turn-indicator">
+            <span id="turnText">Rodada 1</span>
+          </div>
+          <div class="player-info player2-info" id="player2Box">
+            <span class="player-name" id="player2Name">Jogador 2</span>
+            <span class="player-remaining" id="player2Count">40 restantes</span>
+          </div>
+        </div>
+
+        <!-- Personagem Secreto (para não esquecer) -->
+        <div class="secret-reminder" id="secretReminder">
+          <div class="secret-reminder-content">
+            <span class="secret-reminder-label">Seu personagem secreto:</span>
+            <span class="secret-reminder-emoji" id="secretEmoji"><img src="" alt="" class="secret-img" style="display:none"></span>
+            <span class="secret-reminder-name" id="secretName">Nome</span>
+          </div>
+        </div>
+
+        <!-- Tabuleiro -->
+        <div class="cara-board" id="gameBoard">
+          <!-- Personagens serão inseridos aqui -->
+        </div>
+
+        <!-- Área de Perguntas -->
+        <div class="cara-questions">
+          <div class="question-input">
+            <input type="text" id="customQuestion" placeholder="Digite sua pergunta..." maxlength="100">
+            <button class="btn-cara btn-ask" onclick="askCustomQuestion()">
+              ❓ Perguntar
+            </button>
+          </div>
+          
+          <div class="quick-questions">
+            <h4>Perguntas Rápidas:</h4>
+            <div class="question-tags" id="questionTags">
+              <!-- Tags serão inseridas aqui -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Histórico de Perguntas -->
+        <div class="question-history" id="questionHistory">
+          <h4>📝 Histórico de Perguntas</h4>
+          <div class="history-list" id="historyList">
+            <!-- Perguntas serão inseridas aqui -->
+          </div>
+        </div>
+
+        <!-- Área de Resposta -->
+        <div class="cara-answer" id="answerArea" style="display: none;">
+          <div class="answer-box">
+            <p id="questionDisplay">Pergunta...</p>
+            <div class="answer-buttons">
+              <button class="btn-cara btn-yes" id="btnYes" onclick="answerQuestion(true)">✅ Sim</button>
+              <button class="btn-cara btn-no" id="btnNo" onclick="answerQuestion(false)">❌ Não</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tentativa Final -->
+        <div class="cara-guess" id="guessArea" style="display: none;">
+          <div class="guess-box">
+            <h3>🎯 Tentar Adivinhar</h3>
+            <p>Quem é o personagem secreto?</p>
+            <p class="guess-attempts" id="guessAttemptsText">Tentativas restantes: 3</p>
+            <select id="guessSelect" class="guess-select">
+              <!-- Opções serão inseridas aqui -->
+            </select>
+            <button class="btn-cara btn-guess" onclick="makeGuess()">
+              🎯 Adivinhar!
+            </button>
+          </div>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="cara-actions">
+          <button class="btn-cara btn-guess-toggle" onclick="toggleGuessArea()">
+            🎯 Tentar Adivinhar
+          </button>
+          <button class="btn-cara btn-giveup" onclick="giveUp()">
+            🏳️ Desistir
+          </button>
+        </div>
+      </div>
+
+      <!-- Tela de Resultado -->
+      <div class="cara-screen" id="screen-result">
+        <div class="cara-result">
+          <div class="result-icon" id="resultIcon">🎉</div>
+          <h1 id="resultTitle">Parabéns!</h1>
+          <p id="resultMessage">Você adivinhou o personagem!</p>
+          
+          <div class="result-secret">
+            <h3>Personagem Secreto:</h3>
+            <div class="secret-character" id="secretCharacter">
+              <img src="" alt="" class="secret-img" style="display:none">
+              <span class="secret-name">Nome</span>
+            </div>
+            <p class="secret-desc" id="secretDesc">Descrição...</p>
+          </div>
+
+          <div class="result-stats">
+            <div class="stat">
+              <span class="stat-value" id="statQuestions">0</span>
+              <span class="stat-label">Perguntas</span>
+            </div>
+            <div class="stat">
+              <span class="stat-value" id="statEliminated">0</span>
+              <span class="stat-label">Eliminados</span>
+            </div>
+          </div>
+
+          <div class="result-buttons">
+            <button class="btn-cara btn-revenge" onclick="revenge()">
+              🔄 Revanche
+            </button>
+            <button class="btn-cara btn-newgame" onclick="newGame()">
+              🆕 Nova Partida
+            </button>
+            <button class="btn-cara btn-home" onclick="goHome()">
+              🏠 Menu
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="cara-a-cara/characters.js"></script>
+  <script src="cara-a-cara/game.js"></script>
+</body>
+</html>

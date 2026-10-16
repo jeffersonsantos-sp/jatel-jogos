@@ -1,0 +1,20 @@
+# Credenciais e arquivos sensíveis
+php/conexao.php
+php/ai_responder.php
+.env
+*.key
+*.pem
+
+# Banco de dados / backups
+*.sql
+*.sql.dump
+sql/*.sql
+
+# Dependências / builds
+node_modules/
+dist/
+build/
+
+# Sistema
+.DS_Store
+Thumbs.db

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JATEL-GAMES - Conversas no Serviço de Pregação</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/game-shared.css">
+  <link rel="stylesheet" href="jovens/style.css">
+</head>
+<body class="youth-game">
+
+  <header class="game-header">
+    <h1>Conversas no Serviço de Pregação</h1>
+    <nav>
+      <a href="index.html">← Home</a>
+    </nav>
+  </header>
+
+  <main class="game-content youth-content">
+    <div class="youth-card">
+      <div class="score-section">
+        <div class="score-badge">
+          <span class="score-icon">⭐</span>
+          <span class="score-label">Pontuação</span>
+          <span class="score-value" id="score">0</span>
+        </div>
+        <div class="progress-badge">
+          <span class="progress-label">Pergunta</span>
+          <span class="progress-value" id="progress">1/59</span>
+        </div>
+      </div>
+
+      <div class="situation-box">
+        <div class="situation-icon">💭</div>
+        <div id="situation"></div>
+      </div>
+
+      <div id="choices" class="choices-grid"></div>
+
+      <div id="result" class="result-box hidden"></div>
+
+      <div class="action-buttons">
+        <button id="next" class="btn btn-primary hidden">
+          Próxima Pergunta →
+        </button>
+        <button onclick="location.reload()" class="btn btn-outline">
+          🔄 Reiniciar
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <footer class="game-footer">
+    <p>&copy; Jefferson Santos v5.0</p>
+  </footer>
+
+  <script src="jovens/script.js"></script>
+</body>
+</html>

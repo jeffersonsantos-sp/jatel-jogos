@@ -1,0 +1,7 @@
+CATEGORIAS ADICIONADAS:
+- Sexo: Homem / Mulher
+- Período Bíblico: Hebraicas / Gregas Cristãs
+- Função: Rei, Profeta, Sacerdote, Juiz, Apóstolo, etc.
+- Período: Antes de Cristo / Época de Jesus / Depois da Ressurreição
+- Idade: Jovem / Adulto / Idoso
+- Lealdade: Leal / Desleal

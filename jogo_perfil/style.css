@@ -1,0 +1,172 @@
+/* Jogo do Perfil Bíblico - Game Specific Styles */
+
+/* Category-specific backgrounds */
+.category-pessoas {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.category-lugares {
+  background: linear-gradient(135deg, #1a1a2e 0%, #1a3a2e 50%, #0f3460 100%);
+}
+
+.category-coisas {
+  background: linear-gradient(135deg, #1a1a2e 0%, #2e1a3a 50%, #0f3460 100%);
+}
+
+/* Category Page Layout */
+.category-page {
+  max-width: 1000px;
+  padding: var(--space-xl) var(--space-lg);
+}
+
+.category-intro {
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+  padding: var(--space-2xl);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xl);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.category-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+.category-intro h2 {
+  font-size: var(--font-size-2xl);
+  color: white;
+  margin-bottom: var(--space-sm);
+}
+
+.category-intro p {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: var(--font-size-base);
+}
+
+/* Category Buttons */
+#category-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+#category-buttons .btn {
+  padding: var(--space-md) var(--space-2xl);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 15px rgba(26, 107, 90, 0.3);
+}
+
+#category-buttons .btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(26, 107, 90, 0.4);
+}
+
+/* Questions Container */
+#questions-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+/* Question Card */
+.question-card {
+  width: 180px;
+  padding: var(--space-lg);
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
+
+.question-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--color-accent);
+  box-shadow: 0 8px 25px rgba(212, 168, 67, 0.3);
+}
+
+.question-card .question-title {
+  font-weight: 700;
+  color: white;
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-sm);
+}
+
+.question-card .question-number {
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Hints */
+.question-card .hints {
+  display: none;
+  margin-top: var(--space-md);
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: var(--space-md);
+}
+
+.question-card .hints p {
+  margin: var(--space-xs) 0;
+}
+
+.question-card .hints p:first-child {
+  font-weight: 600;
+  color: var(--color-accent-light);
+  font-size: var(--font-size-base);
+  margin-bottom: var(--space-sm);
+}
+
+/* Active card state */
+.question-card.active {
+  background: rgba(26, 107, 90, 0.3);
+  border-color: var(--color-primary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .category-page {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .category-intro {
+    padding: var(--space-lg);
+  }
+
+  .category-icon {
+    font-size: 2.5rem;
+  }
+
+  .category-intro h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  #category-buttons .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .question-card {
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .question-card .hints {
+    font-size: var(--font-size-xs);
+  }
+}

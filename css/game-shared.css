@@ -1,0 +1,277 @@
+/* =================================================================
+   JATEL-GAMES - Shared Game Styles
+   Import this in all game pages after variables.css
+   ================================================================= */
+
+@import url('variables.css');
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-dark);
+}
+
+ul, ol {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-primary);
+  border: none;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+input {
+  font-family: var(--font-primary);
+  outline: none;
+}
+
+/* =================================================================
+   Game Header
+   ================================================================= */
+
+.game-header {
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  color: white;
+  padding: var(--space-md) var(--space-lg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.game-header h1 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin: 0;
+  color: white;
+}
+
+.game-header nav {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+}
+
+.game-header nav a,
+.game-header nav button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-md);
+  background: rgba(255,255,255,0.15);
+  color: white;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+
+.game-header nav a:hover,
+.game-header nav button:hover {
+  background: rgba(255,255,255,0.25);
+  color: white;
+}
+
+/* =================================================================
+   Game Content
+   ================================================================= */
+
+.game-content {
+  flex: 1;
+  padding: var(--space-xl) var(--space-lg);
+  max-width: 900px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* =================================================================
+   Game Footer
+   ================================================================= */
+
+.game-footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-md) var(--space-lg);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  transition: background-color var(--transition-base), border-color var(--transition-base);
+}
+
+.game-footer p {
+  margin: 0;
+}
+
+.game-footer a {
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+/* =================================================================
+   Shared Button Styles
+   ================================================================= */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-dark);
+  color: white;
+}
+
+.btn-accent {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  border: none;
+}
+
+.btn-accent:hover {
+  background: var(--color-accent-dark);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+}
+
+.btn-outline:hover {
+  background: var(--color-primary);
+  color: white;
+}
+
+/* =================================================================
+   Shared Input Styles
+   ================================================================= */
+
+.input {
+  padding: var(--space-sm) var(--space-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  font-family: var(--font-primary);
+  background: var(--color-surface);
+  color: var(--color-text);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.input:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(26, 107, 90, 0.15);
+}
+
+/* =================================================================
+   Dark Mode
+   ================================================================= */
+
+body.dark-mode {
+  --color-bg: #1a1a2e;
+  --color-bg-alt: #16213e;
+  --color-surface: #0f3460;
+  --color-text: #e8e8e8;
+  --color-text-muted: #a0a0a0;
+  --color-border: #2a2a4a;
+}
+
+/* =================================================================
+   Responsive
+   ================================================================= */
+
+@media (max-width: 768px) {
+  .game-header {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .game-header nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .game-content {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .game-footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .game-header h1 {
+    font-size: var(--font-size-base);
+  }
+
+  .game-header nav a,
+  .game-header nav button {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-xs);
+  }
+}

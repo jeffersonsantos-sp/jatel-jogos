@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JATEL-GAMES - Caça-Palavras Bíblicos</title>
+	<link rel="icon" href="images/fevicon.png" type="image/png">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/game-shared.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<header class="game-header">
+		<div class="header-left">
+			<a href="index.html" class="header-back">←</a>
+			<h1>Caça-Palavras Bíblicos</h1>
+		</div>
+		<nav><a href="index.html">Home</a></nav>
+	</header>
+
+	<main class="game-content">
+
+		<div class="cw-intro">
+			<div class="cw-intro-icon">🔍</div>
+			<h2 class="cw-intro-title">Encontre os Nomes Bíblicos</h2>
+			<p class="cw-intro-text">Existem <strong>26 nomes</strong> escondidos na grade. Digite o nome e clique em buscar para encontrá-los!</p>
+		</div>
+
+		<div class="cw-progress">
+			<div class="cw-progress-bar">
+				<div class="cw-progress-fill" id="progressFill"></div>
+			</div>
+			<div class="cw-progress-text">
+				<span id="cwCount">0</span> de <strong>26</strong> encontrados
+			</div>
+		</div>
+
+		<form id="search" data-js="form" class="cw-search">
+			<div class="cw-search-wrapper">
+				<input data-js="search" type="text" class="cw-input" placeholder="Digite um nome bíblico..." autocomplete="off" spellcheck="false">
+				<button type="submit" class="cw-btn-search">
+					<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+					Buscar
+				</button>
+			</div>
+			<div class="cw-found-list" id="foundList"></div>
+		</form>
+
+		<div class="cw-grid-wrapper">
+			<table id="table">
+				<tbody data-js="tbody">
+					<tr data-js="line0"></tr>
+					<tr data-js="line1"></tr>
+					<tr data-js="line2"></tr>
+					<tr data-js="line3"></tr>
+					<tr data-js="line4"></tr>
+					<tr data-js="line5"></tr>
+					<tr data-js="line6"></tr>
+					<tr data-js="line7"></tr>
+					<tr data-js="line8"></tr>
+					<tr data-js="line9"></tr>
+					<tr data-js="line10"></tr>
+					<tr data-js="line11"></tr>
+					<tr data-js="line12"></tr>
+					<tr data-js="line13"></tr>
+					<tr data-js="line14"></tr>
+					<tr data-js="line15"></tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="cw-victory" id="cwVictory" style="display:none;">
+			<div class="cw-victory-icon">🎉</div>
+			<h2 class="cw-victory-title">Parabéns!</h2>
+			<p class="cw-victory-text">Você encontrou todos os <strong>26 nomes bíblicos</strong>!</p>
+			<button class="cw-btn-restart" onclick="location.reload()">Jogar Novamente</button>
+		</div>
+
+	</main>
+
+	<footer class="game-footer">
+		<p>&copy; Jefferson Santos v5.0</p>
+	</footer>
+
+	<script src="js/main.js"></script>
+</body>
+</html>

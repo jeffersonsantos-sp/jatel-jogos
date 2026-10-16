@@ -1,0 +1,46 @@
+/* =================================================================
+   JATEL-GAMES - Responsive Styles
+   ================================================================= */
+
+/* Tablet: 768px - 991px */
+@media (max-width: 991px) {
+  .game-header {
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .game-header h1 {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* Mobile: up to 767px */
+@media (max-width: 767px) {
+  .game-header {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .game-header nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .game-footer {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+/* Small Mobile: up to 480px */
+@media (max-width: 480px) {
+  .game-header h1 {
+    font-size: var(--font-size-base);
+  }
+
+  .game-header nav a,
+  .game-header nav button {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: var(--font-size-xs);
+  }
+}

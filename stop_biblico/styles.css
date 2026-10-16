@@ -1,0 +1,204 @@
+/* Stop Biblico - Game Specific Styles */
+
+#alphabet {
+    margin-bottom: 20px;
+}
+
+.letter {
+    display: inline-block;
+    margin: 5px;
+    padding: 10px;
+    background-color: var(--color-surface, #f0f0f0);
+    color: var(--color-text, black);
+    cursor: pointer;
+    border-radius: var(--radius-sm, 5px);
+    font-family: var(--font-primary);
+    transition: background-color var(--transition-fast, 0.15s ease);
+}
+
+.letter:hover {
+    background-color: var(--color-primary-light, #2a9d8f);
+    color: white;
+}
+
+.letter.selected {
+    background-color: var(--color-primary, #00cc66);
+    color: white;
+    pointer-events: none;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md, 1rem);
+    margin: var(--space-lg, 1.5rem) 0;
+}
+
+.category {
+    background: var(--color-surface, #1a1a1a);
+    padding: var(--space-md, 1rem);
+    border-radius: var(--radius-md, 10px);
+    border: 1px solid var(--color-border, #333);
+}
+
+.category label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--space-xs, 0.25rem);
+    color: var(--color-text, white);
+    font-size: var(--font-size-sm, 0.875rem);
+}
+
+.category input[type="text"] {
+    width: 100%;
+    padding: var(--space-sm, 0.5rem);
+    border: 2px solid var(--color-border, #333);
+    border-radius: var(--radius-sm, 5px);
+    background: var(--color-bg, #121212);
+    color: var(--color-text, white);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base, 1rem);
+    margin-bottom: var(--space-sm, 0.5rem);
+    transition: border-color var(--transition-fast, 0.15s ease);
+}
+
+.category input[type="text"]:focus {
+    border-color: var(--color-primary, #00cc66);
+    outline: none;
+}
+
+.category input[type="number"] {
+    width: 70px;
+    padding: var(--space-xs, 0.25rem) var(--space-sm, 0.5rem);
+    border: 2px solid var(--color-primary, #00cc66);
+    border-radius: var(--radius-sm, 5px);
+    background: var(--color-bg, #121212);
+    color: var(--color-text, white);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm, 0.875rem);
+    text-align: center;
+}
+
+.timer-section {
+    margin: var(--space-xl, 2rem) 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md, 1rem);
+}
+
+.timer-section label {
+    font-size: var(--font-size-lg, 1.125rem);
+    color: var(--color-text, white);
+}
+
+.timer-section input[type="number"] {
+    width: 70px;
+    padding: var(--space-sm, 0.5rem);
+    border: 2px solid var(--color-primary, #00cc66);
+    border-radius: var(--radius-sm, 5px);
+    background: var(--color-bg, #121212);
+    color: var(--color-text, white);
+    font-size: var(--font-size-lg, 1.125rem);
+    text-align: center;
+}
+
+.timer-section button {
+    padding: var(--space-sm, 0.5rem) var(--space-lg, 1.5rem);
+}
+
+#cronometro {
+    font-size: var(--font-size-3xl, 2rem);
+    font-weight: 700;
+    color: var(--color-primary, #00cc66);
+    background-color: var(--color-bg, #1a1a1a);
+    padding: var(--space-2xl, 3rem);
+    border-radius: var(--radius-full, 50%);
+    width: 180px;
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: var(--space-md, 1rem) auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3), inset 0 0 10px rgba(255, 255, 255, 0.05);
+    border: 6px solid var(--color-primary, #00cc66);
+    transition: background-color var(--transition-base, 0.25s ease);
+}
+
+#cronometro:hover {
+    background-color: var(--color-bg-alt, #2e2e2e);
+}
+
+#tempoRestante {
+    font-size: var(--font-size-xl, 1.25rem);
+}
+
+.score-actions {
+    display: flex;
+    gap: var(--space-md, 1rem);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: var(--space-lg, 1.5rem) 0;
+}
+
+#totalRodada, #totalGeral {
+    margin-top: var(--space-lg, 1.5rem);
+    font-size: var(--font-size-xl, 1.25rem);
+    padding: var(--space-md, 1rem);
+    background: var(--color-surface, #1a1a1a);
+    border-radius: var(--radius-md, 10px);
+    border: 1px solid var(--color-border, #333);
+}
+
+#totalRodada span, #totalGeral span {
+    font-weight: 700;
+    color: var(--color-primary, #00cc66);
+}
+
+#historicoRodadas {
+    margin-top: var(--space-xl, 2rem);
+}
+
+#historicoRodadas h2 {
+    font-size: var(--font-size-xl, 1.25rem);
+    margin-bottom: var(--space-md, 1rem);
+    color: var(--color-text, white);
+}
+
+#listaRodadas {
+    list-style: none;
+    padding: 0;
+}
+
+#listaRodadas li {
+    background-color: var(--color-surface, #2c2c2c);
+    margin: var(--space-sm, 0.5rem) 0;
+    padding: var(--space-md, 1rem);
+    border-radius: var(--radius-sm, 5px);
+    border: 1px solid var(--color-border, #333);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .categories {
+        grid-template-columns: 1fr;
+    }
+
+    .score-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .score-actions button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    #cronometro {
+        width: 140px;
+        height: 140px;
+        font-size: var(--font-size-2xl, 1.5rem);
+        padding: var(--space-lg, 1.5rem);
+    }
+}

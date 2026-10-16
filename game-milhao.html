@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JATEL-GAMES - Jogo do Milhão Bíblico</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/game-shared.css">
+  <link rel="stylesheet" href="game-milhao/style.css">
+</head>
+<body class="milhao-body">
+
+  <!-- Tela Inicial -->
+  <div class="milhao-screen active" id="screen-start">
+    <div class="milhao-container">
+      <a href="index.html" class="btn-home-top">🏠 HOME</a>
+      
+      <div class="milhao-logo">
+        <div class="logo-crown">👑</div>
+        <h1 class="logo-title">JOGO DO</h1>
+        <h2 class="logo-milhao">MILHÃO</h2>
+        <div class="logo-subtitle">BÍBLICO</div>
+      </div>
+
+      <div class="milhao-prize-display">
+        <div class="prize-label">PRÊMIO MÁXIMO</div>
+        <div class="prize-value">R$ 1.000.000</div>
+      </div>
+
+      <button class="btn-milhao btn-start" onclick="startGame()">
+        ▶️ INICIAR JOGO
+      </button>
+
+      <div class="milhao-rules">
+        <h3>📋 REGRAS</h3>
+        <ul>
+          <li>30 perguntas progressivas</li>
+          <li>3 livros: Aprenda com as Histórias da Bíblia, Ande Corajosamente com Deus, De Testemunho Cabal</li>
+          <li>Patamares de segurança em P5, P10, P15, P20 e P25</li>
+          <li>3 ajudinhas disponíveis</li>
+          <li>Pode parar a qualquer momento</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tela do Jogo -->
+  <div class="milhao-screen" id="screen-game">
+    <div class="milhao-container">
+      <a href="index.html" class="btn-home-top">🏠 HOME</a>
+
+      <!-- Header com Patamares -->
+      <div class="milhao-header">
+        <div class="milhao-question-number">
+          PERGUNTA <span id="currentQuestion">1</span>/30
+        </div>
+        <div class="milhao-current-prize">
+          <span class="prize-label">ATUAL</span>
+          <span class="prize-amount" id="currentPrize">R$ 0</span>
+        </div>
+      </div>
+
+      <!-- Barra de Progresso -->
+      <div class="milhao-progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+        <div class="progress-markers">
+          <div class="marker" data-question="1">P1</div>
+          <div class="marker" data-question="5">P5</div>
+          <div class="marker safe" data-question="10">P10</div>
+          <div class="marker" data-question="15">P15</div>
+          <div class="marker safe" data-question="20">P20</div>
+          <div class="marker" data-question="25">P25</div>
+          <div class="marker final" data-question="30">P30</div>
+        </div>
+      </div>
+
+      <!-- Tabela de Premiação -->
+      <div class="milhao-prize-table">
+        <div class="prize-column" id="prizeColumn">
+          <!-- Preenchido via JS -->
+        </div>
+      </div>
+
+      <!-- Área da Pergunta -->
+      <div class="milhao-question-area">
+        <div class="question-category" id="questionCategory">Categoria</div>
+        <div class="question-text" id="questionText">Pergunta aqui...</div>
+      </div>
+
+      <!-- Área das Respostas -->
+      <div class="milhao-answers" id="answersArea">
+        <button class="answer-btn" data-index="0" onclick="selectAnswer(0)">
+          <span class="answer-letter">A</span>
+          <span class="answer-text">Resposta A</span>
+        </button>
+        <button class="answer-btn" data-index="1" onclick="selectAnswer(1)">
+          <span class="answer-letter">B</span>
+          <span class="answer-text">Resposta B</span>
+        </button>
+        <button class="answer-btn" data-index="2" onclick="selectAnswer(2)">
+          <span class="answer-letter">C</span>
+          <span class="answer-text">Resposta C</span>
+        </button>
+        <button class="answer-btn" data-index="3" onclick="selectAnswer(3)">
+          <span class="answer-letter">D</span>
+          <span class="answer-text">Resposta D</span>
+        </button>
+      </div>
+
+      <!-- Botões de Ação -->
+      <div class="milhao-actions">
+        <button class="btn-milhao btn-stop" id="btnStop" onclick="stopGame()">
+          💰 PARAR E LEVAR O PRÊMIO
+        </button>
+      </div>
+
+      <!-- Ajudinhas -->
+      <div class="milhao-helps">
+        <button class="help-btn" id="help1" onclick="useHelp('audience')">
+          <span class="help-icon">👥</span>
+          <span class="help-name">Perguntar ao Público</span>
+          <span class="help-count" id="help1Count">1</span>
+        </button>
+        <button class="help-btn" id="help2" onclick="useHelp('eliminate')">
+          <span class="help-icon">❌</span>
+          <span class="help-name">Eliminar 2</span>
+          <span class="help-count" id="help2Count">1</span>
+        </button>
+        <button class="help-btn" id="help3" onclick="useHelp('change')">
+          <span class="help-icon">🔄</span>
+          <span class="help-name">Trocar Pergunta</span>
+          <span class="help-count" id="help3Count">1</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Tela de Vitória -->
+  <div class="milhao-screen" id="screen-win">
+    <div class="milhao-container">
+      <div class="milhao-result">
+        <div class="result-icon">🏆</div>
+        <h1 class="result-title">PARABÉNS!</h1>
+        <p class="result-subtitle">Você ganhou o prêmio!</p>
+        <div class="result-prize" id="finalPrize">R$ 1.000.000</div>
+        <div class="result-message" id="resultMessage">Você é um verdadeiro conhecedor da Palavra de Deus!</div>
+        <button class="btn-milhao btn-restart" onclick="restartGame()">
+          🔄 JOGAR NOVAMENTE
+        </button>
+        <a href="index.html" class="btn-milhao btn-home">🏠 VOLTAR AO INÍCIO</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tela de Derrota -->
+  <div class="milhao-screen" id="screen-lose">
+    <div class="milhao-container">
+      <div class="milhao-result lose">
+        <div class="result-icon">😔</div>
+        <h1 class="result-title">QUE PENA!</h1>
+        <p class="result-subtitle">Você errou a pergunta</p>
+        <div class="result-prize lose-prize" id="lostPrize">R$ 0</div>
+        <div class="result-message">Não desanime! Estude mais a Bíblia e tente novamente!</div>
+        <button class="btn-milhao btn-restart" onclick="restartGame()">
+          🔄 TENTAR NOVAMENTE
+        </button>
+        <a href="index.html" class="btn-milhao btn-home">🏠 VOLTAR AO INÍCIO</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Ajudinhas -->
+  <div class="milhao-modal" id="helpModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Ajudinha</h3>
+        <button class="modal-close" onclick="closeHelpModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Conteúdo dinâmico -->
+      </div>
+      <div class="modal-footer">
+        <button class="btn-milhao btn-modal-close" onclick="closeHelpModal()">ENTENDI</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Confirmação -->
+  <div class="milhao-modal" id="confirmModal">
+    <div class="modal-content confirm">
+      <div class="modal-header">
+        <h3>TEM CERTEZA?</h3>
+      </div>
+      <div class="modal-body">
+        <p>Você tem certeza que deseja parar e levar <strong id="confirmPrize">R$ 0</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-milhao btn-confirm-yes" onclick="confirmStop(true)">SIM, PARAR!</button>
+        <button class="btn-milhao btn-confirm-no" onclick="confirmStop(false)">NÃO, CONTINUAR!</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="game-footer milhao-footer">
+    <p>&copy; Jefferson Santos v5.0</p>
+  </footer>
+
+  <script src="game-milhao/questions.js"></script>
+  <script src="game-milhao/game.js"></script>
+</body>
+</html>

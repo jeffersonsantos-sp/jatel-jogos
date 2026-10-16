@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JATEL-GAMES - Descubra a Imagem</title>
+    <link rel="icon" href="../../images/fevicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../css/game-shared.css">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header class="game-header">
+        <div class="header-left">
+            <a href="../../descubra_a_imagem.html" class="header-back">←</a>
+            <h1>Descubra a Imagem</h1>
+        </div>
+        <nav><a href="../../descubra_a_imagem.html">Desafios</a></nav>
+    </header>
+
+    <main class="game-content">
+        <div class="challenge-area">
+            <div>
+                <div class="challenge-title">Desafio 12</div>
+                <div class="challenge-subtitle">Clique nos quadradinhos para revelar a imagem</div>
+            </div>
+
+            <div class="image-container">
+                <div class="cover" id="cover"></div>
+            </div>
+
+            <div class="challenge-input-area">
+                <input type="text" id="guess-input" class="challenge-input" placeholder="Dica: Personagem" autocomplete="off" spellcheck="false">
+                <button class="challenge-btn" onclick="checkGuess()">Responder</button>
+            </div>
+
+            <p id="result"></p>
+
+            <div class="challenge-nav">
+                <a href="../../descubra_a_imagem.html" class="challenge-nav-btn secondary">← Todos os Desafios</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="game-footer">
+        <p>&copy; Jefferson Santos v5.0</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

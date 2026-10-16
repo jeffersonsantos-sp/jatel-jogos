@@ -1,0 +1,128 @@
+/* Jogo da Memoria - Game Specific Styles */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-bg, #3A3A3A);
+  font-family: var(--font-primary, 'Poppins', sans-serif);
+}
+
+.corpo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  min-height: calc(100vh - 120px);
+}
+
+#esq {
+  background-color: var(--color-surface, white);
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-lg, 1.5rem);
+}
+
+#esq h2 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl, 20px);
+  margin-top: var(--space-lg, 24px);
+  color: var(--color-text, #333);
+}
+
+#esq a {
+  width: min-content;
+  height: min-content;
+  text-decoration: none;
+  color: var(--color-text, rgb(50, 50, 50));
+  padding: var(--space-sm, 10px) var(--space-lg, 20px);
+  border-radius: var(--radius-xl, 50px);
+  border: 3px solid var(--color-text, rgb(50, 50, 50));
+  margin-bottom: 20vh;
+  font-family: var(--font-primary);
+  font-weight: 500;
+  font-size: var(--font-size-lg, 18px);
+  transition: all var(--transition-fast, 0.15s ease);
+}
+
+#esq a:hover {
+  background-color: var(--color-text, rgb(50, 50, 50));
+  color: var(--color-surface, white);
+}
+
+#esq span {
+  padding: var(--space-xs, 5px) var(--space-md, 10px);
+  border-radius: var(--radius-xl, 30px);
+  background-color: var(--color-primary-dark, black);
+  color: white;
+  font-size: var(--font-size-lg, 18px);
+  font-weight: 600;
+}
+
+#responsivo {
+  display: none;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .corpo {
+    grid-template-columns: 1fr;
+  }
+
+  #esq {
+    display: none;
+  }
+
+  #responsivo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-surface, white);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-sm, 12px);
+    text-align: center;
+    padding: var(--space-sm, 5px) var(--space-md, 10px);
+    position: sticky;
+    top: 56px;
+    z-index: 50;
+    border-bottom: 1px solid var(--color-border, #ddd);
+  }
+
+  #responsivo span {
+    padding: var(--space-xs, 5px) var(--space-sm, 8px);
+    border-radius: var(--radius-xl, 30px);
+    background-color: var(--color-primary-dark, black);
+    color: white;
+    font-size: var(--font-size-base, 15px);
+    font-weight: 600;
+  }
+
+  #responsivo h2 {
+    margin: var(--space-xs, 5px);
+    margin-left: var(--space-lg, 24px);
+    font-size: var(--font-size-base, 14px);
+    color: var(--color-text, #333);
+  }
+
+  #responsivo a {
+    background-color: var(--color-primary-dark, black);
+    text-decoration: none;
+    color: white;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: var(--font-size-base, 18px);
+    padding: var(--space-sm, 10px);
+    margin: var(--space-xs, 5px);
+    margin-right: var(--space-lg, 24px);
+    border-radius: var(--radius-md, 10px);
+    transition: all var(--transition-fast, 0.15s ease);
+  }
+
+  #responsivo a:hover {
+    background-color: var(--color-primary, #1a6b5a);
+  }
+}

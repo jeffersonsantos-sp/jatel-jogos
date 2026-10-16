@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JATEL-GAMES - Descubra a Imagem</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/game-shared.css">
+  <link rel="stylesheet" href="game/styles.css">
+</head>
+<body>
+  <header class="game-header">
+    <div class="header-left">
+      <a href="index.html" class="header-back">←</a>
+      <h1>Descubra a Imagem</h1>
+    </div>
+    <nav><a href="index.html">Home</a></nav>
+  </header>
+
+  <main class="game-content">
+
+    <div class="dai-intro">
+      <div class="dai-intro-icon">🖼️</div>
+      <h2 class="dai-intro-title">Desafios Bíblicos</h2>
+      <p class="dai-intro-text">Clique nos quadradinhos para revelar a imagem e descubra qual personagem ou cena bíblica está escondida!</p>
+    </div>
+
+    <div class="dai-grid" id="daiGrid"></div>
+
+  </main>
+
+  <footer class="game-footer">
+    <p>&copy; Jefferson Santos v5.0</p>
+  </footer>
+
+  <script>
+    var hints = [
+      "Personagem", "Personagens", "Personagens", "Milagre", "Personagem",
+      "Personagem", "Personagem", "Personagens", "Personagem", "Personagem",
+      "Personagem", "Personagem", "Personagem", "Personagem", "Personagem",
+      "Personagem", "Personagem", "Personagem + Sentimento", "Personagem", "Personagens"
+    ];
+    var grid = document.getElementById('daiGrid');
+    for (var i = 1; i <= 20; i++) {
+      var card = document.createElement('a');
+      card.href = 'game/desafio-' + i + '/index.html';
+      card.className = 'dai-card';
+      card.innerHTML =
+        '<div class="dai-card-number">' + i + '</div>' +
+        '<div class="dai-card-info">' +
+          '<div class="dai-card-title">Desafio ' + i + '</div>' +
+          '<div class="dai-card-hint">' + hints[i-1] + '</div>' +
+        '</div>' +
+        '<div class="dai-card-arrow">→</div>';
+      grid.appendChild(card);
+    }
+  </script>
+</body>
+</html>

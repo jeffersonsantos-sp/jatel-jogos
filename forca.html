@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JATEL-GAMES - Forca</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/game-shared.css">
+  <link rel="stylesheet" href="assets/style.css">
+  <script defer src="assets/game-board.js"></script>
+  <script defer src="assets/game-logic.js"></script>
+  <script defer src="assets/buttons-functions.js"></script>
+</head>
+<body class="initial forca-game">
+  <header class="game-header">
+    <h1>Jogo da Forca</h1>
+    <nav><a href="index.html">Home</a></nav>
+  </header>
+  <main class="game-content">
+    <p id="hint"></p>
+    <section id="game-board">
+      <canvas width="0" height="0"></canvas>
+      <p id="game-status"></p>
+    </section>
+    <section id="keyboard"></section>
+    <div class="button-container">
+      <button id="play-btn">Novo Jogo</button>
+      <a href="index.html"><button type="button">Home</button></a>
+    </div>
+  </main>
+  <footer class="game-footer">
+    <p>&copy; Jefferson Santos v5.0</p>
+  </footer>
+</body>
+</html>

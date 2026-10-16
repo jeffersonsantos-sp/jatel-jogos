@@ -1,0 +1,130 @@
+/* Jogo da Memoria - Responsive Styles */
+
+@media (max-width: 900px) {
+  .jogo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+  }
+
+  .corpo {
+    justify-content: center;
+  }
+
+  footer {
+    height: auto;
+  }
+
+  #dir {
+    display: none;
+  }
+}
+
+@media (min-height: 760px) {
+  .jogo .card {
+    height: 25vh;
+  }
+
+  .jogo .card img {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+@media (max-width: 700px) {
+  #esq {
+    display: none;
+  }
+
+  #responsivo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-surface, white);
+    font-family: var(--font-primary);
+    font-size: var(--font-size-xs, 12px);
+    text-align: center;
+  }
+
+  #responsivo span {
+    padding: var(--space-xs, 5px) var(--space-sm, 8px);
+    border-radius: var(--radius-xl, 30px);
+    background-color: var(--color-primary-dark, black);
+    color: white;
+    font-size: var(--font-size-base, 15px);
+    font-weight: 600;
+  }
+
+  #responsivo h2 {
+    margin: var(--space-xs, 5px);
+    margin-left: var(--space-lg, 24px);
+    font-size: var(--font-size-sm, 14px);
+    color: var(--color-text, #333);
+  }
+
+  #responsivo a {
+    background-color: var(--color-primary-dark, black);
+    text-decoration: none;
+    color: white;
+    font-family: var(--font-primary);
+    font-weight: 500;
+    font-size: var(--font-size-lg, 18px);
+    padding: var(--space-sm, 10px);
+    margin: var(--space-xs, 5px);
+    margin-right: var(--space-lg, 24px);
+    border-radius: var(--radius-md, 10px);
+    transition: all var(--transition-fast, 0.15s ease);
+  }
+
+  #responsivo a:hover {
+    background-color: var(--color-primary, #1a6b5a);
+  }
+
+  .jogo {
+    margin: 0 5vw;
+  }
+
+  .jogo .card {
+    width: 27vw;
+    height: 17vh;
+  }
+}
+
+@media (max-width: 550px) {
+  .game-header nav a {
+    display: none;
+  }
+
+  .jogo {
+    padding: var(--space-xs, 10px);
+  }
+
+  .jogo .card {
+    width: 27vw;
+    height: 16vh;
+    margin: 1vw;
+  }
+
+  .jogo .card img {
+    width: 80px;
+    height: 80px;
+  }
+
+  #vitoria #container {
+    width: 100%;
+    border-top-left-radius: 0;
+    border-bottom-right-radius: 0;
+    font-size: var(--font-size-xs, 3.2vw);
+  }
+
+  #vitoria a {
+    left: calc(50% - 14.2vw);
+  }
+}
+
+@media (max-width: 280px) {
+  .jogo .card img {
+    width: 70px;
+    height: 70px;
+  }
+}

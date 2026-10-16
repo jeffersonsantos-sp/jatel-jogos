@@ -1,0 +1,16 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+README.md
+LICENSE
+node_modules
+*.log
+__MACOSX
+.DS_Store
+Thumbs.db
+quem_disse/bkp/
+jogo_perfil/test
+scripts/test.js
+_redirects
+htaccess
