@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-xl);
+  gap: var(--space-md);
   min-height: calc(100vh - 140px);
   justify-content: center;
 }
@@ -187,6 +187,8 @@
   padding: var(--space-2xl);
   max-width: 500px;
   width: 100%;
+  max-height: calc(100vh - (var(--space-md) * 2));
+  overflow-y: auto;
   box-shadow: var(--shadow-xl);
   animation: slideUp 0.3s ease;
 }
@@ -280,7 +282,164 @@
   border: 1px solid #ef4444;
 }
 
+/* Level Selection */
+.is-hidden {
+  display: none !important;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.ttt-level-screen {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-xl);
+  min-height: calc(100vh - 140px);
+}
+
+.ttt-level-head {
+  text-align: center;
+}
+
+.ttt-level-head h2 {
+  font-size: var(--font-size-3xl);
+  color: var(--color-text);
+  margin-bottom: var(--space-sm);
+}
+
+.ttt-level-head p {
+  color: var(--color-text-muted);
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.ttt-level-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.ttt-level-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-xl) var(--space-lg);
+  border-radius: var(--radius-xl);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text);
+  text-align: center;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+}
+
+.ttt-level-card:hover,
+.ttt-level-card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+.level-icon {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.level-name {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+}
+
+.ttt-level-card[data-level="nivel1"] .level-name {
+  color: var(--color-primary);
+}
+
+.ttt-level-card[data-level="nivel2"] .level-name {
+  color: var(--color-accent-dark);
+}
+
+.ttt-level-card[data-level="nivel3"] .level-name {
+  color: #6366f1;
+}
+
+.level-book {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+.level-desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  min-height: 3.5em;
+}
+
+.level-count {
+  margin-top: auto;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  background: var(--color-bg-alt);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Level Badge */
+.ttt-level-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.ttt-level-badge {
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-full);
+  background: var(--color-primary);
+  color: white;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.ttt-change-level {
+  padding: var(--space-xs) var(--space-md);
+  font-size: var(--font-size-sm);
+}
+
+/* Question Reference */
+.question-reference {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-md);
+  font-style: italic;
+}
+
 /* Responsive */
+@media (max-width: 768px) {
+  .ttt-level-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ttt-level-card {
+    padding: var(--space-lg);
+  }
+
+  .level-desc {
+    min-height: 0;
+  }
+}
+
 @media (max-width: 600px) {
   .ttt-container {
     padding: var(--space-md);

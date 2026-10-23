@@ -19,7 +19,39 @@
   </header>
 
   <main class="game-content">
-    <div class="ttt-container">
+    <section class="ttt-level-screen" id="levelScreen">
+      <div class="ttt-level-head">
+        <h2>Escolha o nível</h2>
+        <p>Cada nível tem 50 perguntas. As perguntas são embaralhadas a cada novo jogo.</p>
+      </div>
+
+      <div class="ttt-level-grid">
+        <button type="button" class="ttt-level-card" data-level="nivel1">
+          <span class="level-icon" aria-hidden="true">🌱</span>
+          <span class="level-name">Basico</span>
+          <span class="level-count">50 perguntas</span>
+        </button>
+
+        <button type="button" class="ttt-level-card" data-level="nivel2">
+          <span class="level-icon" aria-hidden="true">📘</span>
+          <span class="level-name">Científico</span>
+          <span class="level-count">50 perguntas</span>
+        </button>
+
+        <button type="button" class="ttt-level-card" data-level="nivel3">
+          <span class="level-icon" aria-hidden="true">🔎</span>
+          <span class="level-name">Profetico</span>
+          <span class="level-count">50 perguntas</span>
+        </button>
+      </div>
+    </section>
+
+    <div class="ttt-container is-hidden" id="gameScreen">
+
+      <div class="ttt-level-bar">
+        <span class="ttt-level-badge" id="levelBadge">Nível: —</span>
+        <button type="button" class="btn btn-outline ttt-change-level" onclick="showLevelScreen()">Trocar nível</button>
+      </div>
 
       <div class="ttt-scoreboard">
         <div class="score-item score-x">
@@ -61,6 +93,7 @@
   <div class="question-modal" id="questionModal">
     <div class="question-card">
       <div class="question-category" id="questionCategory">Categoria</div>
+      <div class="question-reference" id="questionReference"></div>
       <div class="question-text" id="questionText">Pergunta aqui...</div>
       <div class="question-options" id="questionOptions"></div>
       <div class="question-feedback hidden" id="questionFeedback"></div>
@@ -71,7 +104,9 @@
     <p>&copy; Jefferson Santos v5.0</p>
   </footer>
 
-  <script src="tic-tac-toe/questions.js"></script>
+  <script src="tic-tac-toe/questions-nivel1.js"></script>
+  <script src="tic-tac-toe/questions-nivel2.js"></script>
+  <script src="tic-tac-toe/questions-nivel3.js"></script>
   <script src="tic-tac-toe/game.js"></script>
 </body>
 </html>

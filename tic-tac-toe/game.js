@@ -2,13 +2,36 @@
 // Jogo da Velha Bíblico - Game Logic
 // ============================================
 
+const LEVELS = {
+  nivel1: {
+    name: "Basico",
+    icon: "🌱",
+    book: "Histórias Bíblicas • Imite a Sua Fé • Jesus",
+    questions: BIBLICAL_QUESTIONS_NIVEL1
+  },
+  nivel2: {
+    name: "Científico",
+    icon: "📘",
+    book: "A Vida — Teve um Criador?",
+    questions: BIBLICAL_QUESTIONS_NIVEL2
+  },
+  nivel3: {
+    name: "Profetico",
+    icon: "🔎",
+    book: "Profecia de Isaías I • Viva Tendo em Mente o Dia de Jeová",
+    questions: BIBLICAL_QUESTIONS_NIVEL3
+  }
+};
+
 // Game State
 let board = Array(9).fill(null);
 let currentPlayer = 'X';
 let gameActive = true;
 let scores = { X: 0, O: 0, draw: 0 };
 let currentCellIndex = null;
-let usedQuestions = [];
+let currentLevel = null;
+let questionDeck = [];
+let questionDeckIndex = 0;
 
 // DOM Elements
 const cells = document.querySelectorAll('.ttt-cell');
@@ -21,8 +44,12 @@ const playerOName = document.getElementById('playerOName');
 const questionModal = document.getElementById('questionModal');
 const questionCategory = document.getElementById('questionCategory');
 const questionText = document.getElementById('questionText');
+const questionReference = document.getElementById('questionReference');
 const questionOptions = document.getElementById('questionOptions');
 const questionFeedback = document.getElementById('questionFeedback');
+const levelScreen = document.getElementById('levelScreen');
+const gameScreen = document.getElementById('gameScreen');
+const levelBadge = document.getElementById('levelBadge');
 
 // Winning Combinations
 const WINNING_COMBOS = [
@@ -36,8 +63,42 @@ function init() {
   cells.forEach(cell => {
     cell.addEventListener('click', () => handleCellClick(cell));
   });
+
+  document.querySelectorAll('.ttt-level-card').forEach(card => {
+    card.addEventListener('click', () => selectLevel(card.dataset.level));
+  });
+
+  showLevelScreen();
+  updateScoreboard();
+}
+
+// Level Selection
+function selectLevel(levelId) {
+  const level = LEVELS[levelId];
+  if (!level) return;
+
+  currentLevel = levelId;
+  scores = { X: 0, O: 0, draw: 0 };
+  resetBoard();
+  questionDeck = shuffle([...level.questions]);
+  questionDeckIndex = 0;
+
+  levelBadge.textContent = `${level.icon} ${level.name}`;
+  levelBadge.dataset.level = levelId;
+  levelScreen.classList.add('is-hidden');
+  gameScreen.classList.remove('is-hidden');
+
   updateStatus();
   updateScoreboard();
+}
+
+function showLevelScreen() {
+  closeQuestionModal();
+  currentCellIndex = null;
+  levelScreen.classList.remove('is-hidden');
+  gameScreen.classList.add('is-hidden');
+  status.textContent = 'Escolha um nível para começar';
+  status.style.background = 'var(--color-surface)';
 }
 
 // Handle Cell Click
@@ -52,12 +113,17 @@ function handleCellClick(cell) {
 
 // Show Question Modal
 function showQuestion() {
-  const question = getRandomQuestion();
+  const question = nextQuestion();
+  if (!question) return;
 
   questionCategory.textContent = question.category;
   questionText.textContent = question.question;
-  questionFeedback.classList.add('hidden');
+  questionReference.textContent = question.reference ? `📖 ${question.reference}` : '';
+  questionReference.classList.toggle('is-hidden', !question.reference);
+
+  questionFeedback.hidden = true;
   questionFeedback.textContent = '';
+  questionFeedback.className = 'question-feedback';
 
   questionOptions.innerHTML = '';
   question.options.forEach((option, index) => {
@@ -70,18 +136,30 @@ function showQuestion() {
   questionModal.classList.add('active');
 }
 
-// Get Random Question (avoiding repeats)
-function getRandomQuestion() {
-  if (usedQuestions.length >= BIBLICAL_QUESTIONS.length) {
-    usedQuestions = [];
+// Get Next Question (shuffled deck, no repeats until the deck is exhausted)
+function nextQuestion() {
+  if (!currentLevel) return null;
+
+  const pool = LEVELS[currentLevel].questions;
+
+  if (questionDeck.length === 0 || questionDeckIndex >= questionDeck.length) {
+    questionDeck = shuffle([...pool]);
+    questionDeckIndex = 0;
   }
 
-  let availableQuestions = BIBLICAL_QUESTIONS.filter((_, index) => !usedQuestions.includes(index));
-  const randomIndex = Math.floor(Math.random() * availableQuestions.length);
-  const questionIndex = BIBLICAL_QUESTIONS.indexOf(availableQuestions[randomIndex]);
+  return questionDeck[questionDeckIndex++];
+}
 
-  usedQuestions.push(questionIndex);
-  return BIBLICAL_QUESTIONS[questionIndex];
+// Fisher-Yates Shuffle
+function shuffle(items) {
+  const result = [...items];
+
+  for (let i = result.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [result[i], result[j]] = [result[j], result[i]];
+  }
+
+  return result;
 }
 
 // Handle Answer
@@ -99,7 +177,7 @@ function handleAnswer(selectedIndex, correctIndex) {
   });
 
   if (selectedIndex === correctIndex) {
-    // Correct answer - place mark
+    questionFeedback.hidden = false;
     questionFeedback.textContent = '✓ Correto! Marque sua posição!';
     questionFeedback.className = 'question-feedback correct';
 
@@ -108,7 +186,7 @@ function handleAnswer(selectedIndex, correctIndex) {
       placeMark(currentCellIndex);
     }, 1000);
   } else {
-    // Wrong answer - lose turn
+    questionFeedback.hidden = false;
     questionFeedback.textContent = '✗ Incorreto! Sua vez acabou.';
     questionFeedback.className = 'question-feedback incorrect';
 
@@ -185,6 +263,7 @@ function handleDraw() {
 function updateStatus() {
   const playerName = currentPlayer === 'X' ? playerXName.textContent : playerOName.textContent;
   const symbol = currentPlayer === 'X' ? '✕' : '◯';
+
   status.textContent = `Vez do ${playerName} (${symbol})`;
   status.style.background = 'var(--color-surface)';
 }
@@ -200,17 +279,41 @@ function updateScoreboard() {
   document.querySelector('.score-o').classList.toggle('active', currentPlayer === 'O');
 }
 
-// Restart Game
-function restartGame() {
+// Reset Board
+function resetBoard() {
   board = Array(9).fill(null);
   currentPlayer = 'X';
   gameActive = true;
-  usedQuestions = [];
+  currentCellIndex = null;
 
   cells.forEach(cell => {
     cell.textContent = '';
     cell.className = 'ttt-cell';
   });
+
+  closeQuestionModal();
+}
+
+// Close Question Modal
+function closeQuestionModal() {
+  questionModal.classList.remove('active');
+  questionFeedback.hidden = true;
+  questionFeedback.textContent = '';
+  questionFeedback.className = 'question-feedback';
+  questionOptions.innerHTML = '';
+  questionReference.textContent = '';
+}
+
+// Restart Game (same level, new shuffled deck, scores kept)
+function restartGame() {
+  if (!currentLevel) {
+    showLevelScreen();
+    return;
+  }
+
+  resetBoard();
+  questionDeck = shuffle([...LEVELS[currentLevel].questions]);
+  questionDeckIndex = 0;
 
   updateStatus();
   updateScoreboard();

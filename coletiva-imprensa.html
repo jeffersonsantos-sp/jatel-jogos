@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Coletiva de Imprensa Bíblica: um jogo de improviso em família com personagens, locais e acontecimentos da Bíblia.">
+  <title>JATEL-GAMES - Coletiva de Imprensa Bíblica</title>
+  <link rel="icon" href="images/fevicon.png" type="image/png">
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="coletiva-imprensa/style.css">
+</head>
+<body class="coletiva-body">
+  <div class="page-texture" aria-hidden="true"></div>
+
+  <main class="coletiva-app">
+    <section class="screen screen-start is-active" id="screen-inicio" aria-labelledby="tituloInicio">
+      <div class="shell start-shell">
+        <header class="topbar">
+          <a href="index.html" class="brand" aria-label="JATEL-GAMES - início">
+            <span class="brand-mark">CI</span>
+            <span class="brand-text">
+              <strong>JATEL-GAMES</strong>
+              <small>SALA DE IMPRENSA</small>
+            </span>
+          </a>
+          <a href="index.html" class="home-link">VOLTAR AO INÍCIO</a>
+        </header>
+
+        <div class="hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow"><span class="live-dot"></span> JOGO DE IMPROVISO BÍBLICO</p>
+            <h1 class="hero-title">COLETIVA<br><span>DE IMPRENSA</span></h1>
+            <p class="hero-subtitle">Uma figura bíblica. Um microfone. Nenhuma resposta pronta.</p>
+            <p class="hero-description">Os repórteres recebem a pauta secreta e fazem perguntas. O entrevistado improvisa e, no fim, precisa descobrir quem é, onde está e o que aconteceu.</p>
+
+            <div class="setup">
+              <p class="setup-label">DURAÇÃO DA ENTREVISTA</p>
+              <div class="duration-options" role="group" aria-label="Duração da entrevista">
+                <button class="duration-btn" type="button" data-seconds="120" aria-pressed="false">2 MIN</button>
+                <button class="duration-btn is-active" type="button" data-seconds="180" aria-pressed="true">3 MIN</button>
+              </div>
+            </div>
+
+            <button class="btn btn-primary btn-large" id="btnComecar" type="button">
+              ABRIR A COLETIVA <span aria-hidden="true">→</span>
+            </button>
+            <p class="microcopy">Jogue passando o celular ou projete a tela dos repórteres na TV.</p>
+          </div>
+
+          <aside class="press-pass" aria-label="Resumo do jogo">
+            <div class="pass-top">
+              <span>ACESSO À SALA DE IMPRENSA</span>
+              <span>Nº 021</span>
+            </div>
+            <div class="pass-seal">
+              <span class="seal-number">21</span>
+              <span class="seal-label">PERSONAGENS</span>
+            </div>
+            <p class="pass-title">CREDENCIAL<br>DE REPÓRTER</p>
+            <div class="pass-lines" aria-hidden="true"><span></span><span></span><span></span></div>
+            <div class="pass-bottom">
+              <span>IMPROVISO</span>
+              <span>BÍBLIA</span>
+              <span>FAMÍLIA</span>
+            </div>
+          </aside>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card">
+            <span class="step-number">01</span>
+            <h2>Pauta secreta</h2>
+            <p>Os repórteres veem o personagem, o local e o acontecimento. O entrevistado não vê nada.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">02</span>
+            <h2>Entrevista improvisada</h2>
+            <p>A família pergunta. O entrevistado responde em personagem, sem dizer o próprio nome.</p>
+          </article>
+          <article class="step-card">
+            <span class="step-number">03</span>
+            <h2>Revelação</h2>
+            <p>Todos descobrem a identidade, o lugar e o relato bíblico. Depois, o placar decide o clima da redação.</p>
+          </article>
+        </div>
+
+        <p class="footnote">Baseado no formato “Coletiva de Imprensa”. Adaptação bíblica para adoração em família.</p>
+      </div>
+    </section>
+
+    <section class="screen screen-game" id="screen-pauta" aria-labelledby="pautaTitulo">
+      <div class="shell shell-wide">
+        <header class="game-topbar">
+          <a href="index.html" class="brand brand-compact" aria-label="JATEL-GAMES - início">
+            <span class="brand-mark">CI</span>
+            <span class="brand-text"><strong>COLETIVA DE IMPRENSA</strong><small>PAUTA CONFIDENCIAL</small></span>
+          </a>
+          <div class="status-cluster">
+            <div class="status"><span>RODADA</span><strong id="statusRodada">01</strong></div>
+            <div class="status"><span>ACERTOS</span><strong id="statusAcertos">0/0</strong></div>
+            <button class="text-btn" id="btnEncerrar" type="button">ENCERRAR</button>
+          </div>
+        </header>
+
+        <div class="screen-heading">
+          <div>
+            <p class="eyebrow eyebrow-red">PAUTA CONFIDENCIAL</p>
+            <h1 id="pautaTitulo">Área dos repórteres</h1>
+          </div>
+          <span class="round-badge" id="pautaRodada">RODADA 01</span>
+        </div>
+
+        <p class="warning-strip"><strong>ATENÇÃO:</strong> não mostre esta tela ao entrevistado. Ele deve ficar de costas para a TV ou com o celular virado apenas para os repórteres.</p>
+
+        <div class="briefing-grid">
+          <figure class="clue-image">
+            <img id="pautaImagem" src="" alt="">
+            <figcaption>
+              <span id="pautaTestamento">ANTIGO TESTAMENTO</span>
+              <span>PISTA VISUAL</span>
+            </figcaption>
+          </figure>
+
+          <div class="briefing-card">
+            <p class="kicker">QUEM ESTÁ DANDO A ENTREVISTA</p>
+            <h2 id="pautaNome">Personagem</h2>
+
+            <div class="fact">
+              <span class="fact-label">ONDE ESTÁ</span>
+              <p id="pautaOnde"></p>
+            </div>
+            <div class="fact">
+              <span class="fact-label">O QUE ACONTECEU</span>
+              <p id="pautaAconteceu"></p>
+            </div>
+
+            <div class="question-block" id="pautaPerguntaWrap" hidden>
+              <span>PERGUNTA DE AQUECIMENTO</span>
+              <p id="pautaPergunta"></p>
+            </div>
+
+            <div class="question-block prompt-list">
+              <span>PERGUNTAS PARA COMEÇAR</span>
+              <ul>
+                <li>Onde você estava quando tudo aconteceu?</li>
+                <li>Quem estava com você e como reagiu?</li>
+                <li>O que essa experiência mudou em você?</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions-row">
+          <button class="btn btn-ghost" id="btnTrocar" type="button">TROCAR PERSONAGEM</button>
+          <button class="btn btn-primary btn-large" id="btnIniciarEntrevista" type="button">INICIAR ENTREVISTA <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-game" id="screen-entrega" aria-labelledby="entregaTitulo">
+      <div class="shell cover-shell">
+        <header class="game-topbar">
+          <a href="index.html" class="brand brand-compact" aria-label="JATEL-GAMES - início">
+            <span class="brand-mark">CI</span>
+            <span class="brand-text"><strong>COLETIVA DE IMPRENSA</strong><small>ENTREGA DO MICROFONE</small></span>
+          </a>
+          <div class="status-cluster">
+            <div class="status"><span>RODADA</span><strong id="entregaRodada">01</strong></div>
+            <div class="status"><span>ACERTOS</span><strong id="entregaAcertos">0/0</strong></div>
+          </div>
+        </header>
+
+        <div class="cover-card">
+          <p class="eyebrow">A PAUTA ESTÁ PRONTA</p>
+          <div class="handoff-mark" aria-hidden="true">→</div>
+          <h1 id="entregaTitulo">Passe o dispositivo</h1>
+          <p class="cover-lead">Entregue o celular ao entrevistado. A próxima tela não mostra o personagem, o local nem o acontecimento.</p>
+
+          <div class="cover-rules">
+            <p><span>1</span> Fique de costas para a TV ou segure o celular só para você.</p>
+            <p><span>2</span> Responda às perguntas como se fosse o personagem.</p>
+            <p><span>3</span> Ao final, diga quem você acha que é, onde está e o que aconteceu.</p>
+          </div>
+
+          <button class="btn btn-primary btn-large" id="btnEstouPronto" type="button">ESTOU PRONTO</button>
+          <button class="text-btn" id="btnVoltarPauta" type="button">VOLTAR À PAUTA</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-game" id="screen-entrevista" aria-labelledby="entrevistaTitulo">
+      <div class="shell interview-shell">
+        <header class="game-topbar">
+          <a href="index.html" class="brand brand-compact" aria-label="JATEL-GAMES - início">
+            <span class="brand-mark">CI</span>
+            <span class="brand-text"><strong>COLETIVA DE IMPRENSA</strong><small>ENTREVISTA AO VIVO</small></span>
+          </a>
+          <div class="status-cluster">
+            <div class="status"><span>RODADA</span><strong id="entrevistaRodada">01</strong></div>
+            <div class="status"><span>ACERTOS</span><strong id="entrevistaAcertos">0/0</strong></div>
+          </div>
+        </header>
+
+        <div class="interview-head">
+          <span class="live-pill"><span class="live-dot"></span> ENTREVISTA AO VIVO</span>
+          <span class="interview-role">VOCÊ É O ENTREVISTADO</span>
+        </div>
+
+        <div class="timer-card">
+          <p class="timer-label">TEMPO RESTANTE</p>
+          <div class="timer" id="timer" role="timer" aria-live="off">03:00</div>
+          <div class="timer-track" aria-hidden="true"><div class="timer-bar" id="timerBar"></div></div>
+        </div>
+
+        <div class="interview-instructions">
+          <h1 id="entrevistaTitulo">Responda como o personagem</h1>
+          <p>Sua família faz as perguntas. Fale em voz alta, use detalhes do relato e não diga seu nome.</p>
+        </div>
+
+        <div class="hint-box" id="dicaBox" hidden>
+          <span>PISTA LIBERADA</span>
+          <p id="dicaTexto"></p>
+        </div>
+
+        <div class="interview-actions">
+          <button class="btn btn-ghost" id="btnDica" type="button">PEDIR UMA PISTA</button>
+          <button class="btn btn-primary btn-large" id="btnRevelar" type="button">REVELAR RESPOSTA</button>
+        </div>
+        <p class="microcopy center">Ao final, diga quem você é, onde está e o que aconteceu.</p>
+      </div>
+    </section>
+
+    <section class="screen screen-game" id="screen-revelacao" aria-labelledby="revealNome">
+      <div class="shell reveal-shell">
+        <header class="game-topbar">
+          <a href="index.html" class="brand brand-compact" aria-label="JATEL-GAMES - início">
+            <span class="brand-mark">CI</span>
+            <span class="brand-text"><strong>COLETIVA DE IMPRENSA</strong><small>RESPOSTA REVELADA</small></span>
+          </a>
+          <div class="status-cluster">
+            <div class="status"><span>RODADA</span><strong id="revealRodada">01</strong></div>
+            <div class="status"><span>ACERTOS</span><strong id="revealAcertos">0/0</strong></div>
+          </div>
+        </header>
+
+        <div class="reveal-banner" aria-hidden="true">
+          <span>EXTRA</span><strong>RESPOSTA REVELADA</strong><span>EXTRA</span>
+        </div>
+
+        <div class="reveal-grid">
+          <figure class="reveal-image">
+            <img id="revealImagem" src="" alt="">
+            <figcaption id="revealTestamento"></figcaption>
+          </figure>
+
+          <div class="reveal-copy">
+            <p class="eyebrow">O ENTREVISTADO ERA</p>
+            <h1 id="revealNome">Personagem</h1>
+
+            <div class="fact">
+              <span class="fact-label">ONDE ESTAVA</span>
+              <p id="revealOnde"></p>
+            </div>
+            <div class="fact">
+              <span class="fact-label">O QUE ACONTECEU</span>
+              <p id="revealAconteceu"></p>
+            </div>
+
+            <div class="reference-block">
+              <span>LEITURA BÍBLICA</span>
+              <strong id="revealReferencia"></strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="score-panel">
+          <div class="score-summary">
+            <p class="score-label">PLACAR</p>
+            <p class="score-value" id="revealPlacar">0 de 0</p>
+          </div>
+
+          <div class="result-prompt" id="resultPrompt">
+            <p>O entrevistado acertou?</p>
+            <div class="result-actions">
+              <button class="btn btn-success" id="btnAcertou" type="button">SIM, ACERTOU</button>
+              <button class="btn btn-ghost" id="btnErrou" type="button">NÃO ACERTOU</button>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-large" id="btnProximo" type="button" hidden>PRÓXIMO PERSONAGEM <span aria-hidden="true">→</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section class="screen screen-game" id="screen-final" aria-labelledby="finalTitulo">
+      <div class="shell cover-shell">
+        <header class="game-topbar">
+          <a href="index.html" class="brand brand-compact" aria-label="JATEL-GAMES - início">
+            <span class="brand-mark">CI</span>
+            <span class="brand-text"><strong>COLETIVA DE IMPRENSA</strong><small>EDIÇÃO ENCERRADA</small></span>
+          </a>
+        </header>
+
+        <div class="final-card">
+          <p class="eyebrow">FIM DA TRANSMISSÃO</p>
+          <div class="final-mark" aria-hidden="true">FIM</div>
+          <h1 id="finalTitulo">Fim da coletiva.</h1>
+          <p class="final-score">Você passou por <strong id="finalRodadas">0</strong> personagens e acertou <strong id="finalAcertos">0</strong>.</p>
+          <p class="final-message" id="finalMensagem"></p>
+          <button class="btn btn-primary btn-large" id="btnJogarNovamente" type="button">JOGAR NOVAMENTE</button>
+          <a class="btn btn-ghost" href="index.html">VOLTAR AO INÍCIO</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <p class="sr-only" id="srStatus" aria-live="polite"></p>
+
+  <script src="coletiva-imprensa/personagens.js" defer></script>
+  <script src="coletiva-imprensa/game.js" defer></script>
+</body>
+</html>

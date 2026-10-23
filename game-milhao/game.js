@@ -1,6 +1,6 @@
 // ============================================
 // JOGO DO MILHÃO BÍBLICO - Lógica do Jogo
-// 30 perguntas, 5 livros diferentes
+// 30 perguntas, 3 níveis
 // ============================================
 
 // Estado do jogo
@@ -45,15 +45,13 @@ const elements = {
 };
 
 // ============================================
-// SELECIONAR PERGUNTAS ALEATÓRIAS
+// SELECIONAR PERGUNTAS
 // ============================================
 
-function selectRandomQuestions() {
-  // Embaralhar todas as perguntas
-  const shuffled = shuffleArray([...MILHAO_QUESTIONS]);
-
-  // Pegar as primeiras 30 perguntas
-  return shuffled.slice(0, QUESTIONS_PER_GAME);
+function selectGameQuestions() {
+  return [1, 2, 3].flatMap(book =>
+    shuffleArray([...MILHAO_LEVELS[book]]).slice(0, QUESTIONS_PER_LEVEL)
+  );
 }
 
 // ============================================
@@ -61,8 +59,7 @@ function selectRandomQuestions() {
 // ============================================
 
 function startGame() {
-  // Selecionar perguntas aleatórias
-  const questions = selectRandomQuestions();
+  const questions = selectGameQuestions();
 
   gameState = {
     currentQuestion: 0,
@@ -254,10 +251,9 @@ function loadQuestion() {
 
 function getCategoryForBook(book) {
   const categories = {
-    1: 'Aprenda Historias Biblia',
-    2: 'ANDE CORAJOSAMENTE',
-    3: 'DE TESTEMUNHO CABAL'
-    
+    1: 'Aprenda com as Histórias da Bíblia',
+    2: 'Ande Corajosamente com Deus',
+    3: 'De Testemunho Cabal'
   };
   return categories[book] || 'BÍBLIA';
 }
@@ -514,35 +510,32 @@ function showEliminateHelp() {
 }
 
 function showChangeHelp() {
+  const current = gameState.currentQuestions[gameState.currentQuestion];
+  const availableQuestions = MILHAO_LEVELS[current.book].filter(q =>
+    !gameState.answeredQuestions.some(aq => aq.question === q.question) &&
+    !gameState.currentQuestions.some(cq => cq.question === q.question)
+  );
+
   elements.modalTitle.textContent = '🔄 TROCAR PERGUNTA';
 
-  let changeHTML = `
+  if (availableQuestions.length === 0) {
+    elements.modalBody.innerHTML = `
+      <p style="color: #ccc; margin-bottom: 15px;">Não há outra pergunta disponível neste nível.</p>
+    `;
+    elements.helpModal.classList.add('active');
+    return;
+  }
+
+  const newQuestion = availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
+  gameState.currentQuestions[gameState.currentQuestion] = newQuestion;
+
+  elements.modalBody.innerHTML = `
     <p style="color: #ccc; margin-bottom: 15px;">A pergunta foi trocada!</p>
     <p style="color: #d4a843; font-weight: bold;">Nova pergunta disponível!</p>
   `;
-
-  elements.modalBody.innerHTML = changeHTML;
   elements.helpModal.classList.add('active');
 
-  // Trocar para uma pergunta não utilizada
-  if (gameState.currentQuestion < QUESTIONS_PER_GAME - 1) {
-    // Encontrar uma pergunta que não foi usada
-    let availableQuestions = MILHAO_QUESTIONS.filter((q, idx) => {
-      return !gameState.answeredQuestions.some(aq => aq.question === q.question);
-    });
-
-    if (availableQuestions.length > 0) {
-      // Embaralhar e pegar uma pergunta diferente
-      const shuffled = shuffleArray(availableQuestions);
-      const newQuestion = shuffled[0];
-
-      // Substituir a pergunta atual
-      gameState.currentQuestions[gameState.currentQuestion] = newQuestion;
-
-      // Recarregar a pergunta
-      loadQuestion();
-    }
-  }
+  loadQuestion();
 }
 
 function closeHelpModal() {
